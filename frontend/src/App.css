@@ -1,0 +1,12 @@
+#category-link > a {
+    @apply mx-3 
+}
+#category-link {
+    @apply py-3 
+}
+.label-class {
+    @apply block text-sm font-medium text-gray-600
+}
+.input-class {
+    @apply mt-1 p-2 w-full border rounded-md
+}
