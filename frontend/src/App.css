@@ -10,3 +10,12 @@
 .input-class {
     @apply mt-1 p-2 w-full border rounded-md
 }
+.ql-toolbar.ql-snow {
+    display: flex;
+    justify-content: center;
+    background: rgb(230, 227, 227);
+}
+.ql-container.ql-snow {
+    height: 75vh;
+    background: rgb(247, 246, 246);
+}
