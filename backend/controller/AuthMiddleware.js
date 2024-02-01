@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const userVerification = (req, res) => {
-  // const token = req.cookies.token
   const {token} = req.body;
 
   if (!token) {

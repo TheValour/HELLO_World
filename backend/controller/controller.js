@@ -1,26 +1,21 @@
+import Text from '../modal/ArticleModal.js';
+import BoxPage from '../modal/BoxModal.js';
 import User from '../modal/Model.js'
 import { createSecretToken } from '../util/SecretToken.js';
 import bcrypt from "bcrypt";
 
 export const Signup = async (req, res, next) => {
-  // console.log(req.body)
   try {
-    const { email, password, username, createdAt } = req.body;
+    const { email, password, username, createdAt, title } = req.body;
     const existingUser = await User.findOne({ email });
     
     if (existingUser) {
       return res.json({ message: "User already exists" });
     }
-    const user = await User.create({ email, password, username, createdAt });
+    const user = await User.create({ email, password, username, createdAt, title });
     console.log(user._id)
     const token = createSecretToken(user._id);
     
-    // res.cookie("token", token, {
-    //   withCredentials: true,
-    //   httpOnly: false,
-    // });
-    // console.log(token)
-
     res
       .status(201)
       .json({ message: "User signed in successfully", success: true, user, token });
@@ -47,14 +42,40 @@ export const Login = async (req, res, next) => {
     }
     const token = createSecretToken(user._id);
 
-    // res.cookie("token", token, {
-    //   withCredentials: true,
-    //   httpOnly: false,
-    // });
-     
     res.status(201).json({ message: "User logged in successfully", success: true, token, user });
     next()
   } catch (error) {
     console.error(error);
   }
 }
+
+export const PostArticle = async (req, res, next) => {
+  try {
+    console.log(req.body.user)
+    const { user, article, tags, createdAt, title } = req.body;
+    
+    const textResponse = await Text.create({  user, article, tags, createdAt, title });
+    console.log(user.username)
+    const boxResponse = await BoxPage.create({  "username":user.username, title, tags, createdAt, "_id":textResponse._id });
+    
+    res
+      .status(201)
+      .json({ message: "User article posted successfully", success: true, textResponse });
+    next();
+
+  }catch (error) {
+    console.error(error);
+  }
+}
+export const FindArticle = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    console.log(_id)
+    const postResponse = await Text.findOne({ _id });    
+    res.status(200).json({ message: "User article", success: true, postResponse });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", success: false });
+  }
+};
