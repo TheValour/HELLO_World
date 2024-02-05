@@ -17,11 +17,15 @@ const PublishForm = () => {
     title: '',
     description: '',
     tags: '',
+    image: ''
   });
 
   // Update the state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const fileChangeHandler = (e) => {
+    setFormData({ ...formData, 'image' :e.target.files[0] });
   };
   
   
@@ -94,6 +98,10 @@ const PublishForm = () => {
       </div>
 
       <div className='flex-box w-2/5 border p-5 h-4/5'>
+        <label>Image</label><br/>
+        <input type="file" value={formData.image} onChange={fileChangeHandler} accept="image/*"
+          name="image" className='w-1/5 bg-slate-200 p-2'/><br/> 
+
         <label>Tags (comma-separated):</label><br/>
         <input type="text" value={formData.tags} onChange={handleChange}
           name="tags" className='w-4/5 bg-slate-200 p-2'/><br/> 
