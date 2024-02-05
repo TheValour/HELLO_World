@@ -1,20 +1,20 @@
 const data = [
     {
-      "id": 1,
+      "id": '65bfd80be566754c2b7d23e5',
       "title": "Object 1",
       "description": "Description for Object 1",
       "img": "https://example.com/image1.jpg",
       "category": "tech"
     },
     {
-      "id": 2,
+      "id": '65c11ea0271d19a777fe1b65',
       "title": "Object 2",
       "description": "Description for Object 2",
       "img": "https://example.com/image2.jpg",
       "category": "tech"
     },
     {
-      "id": 3,
+      "id": '65c11f43271d19a777fe1b70',
       "title": "Object 3",
       "description": "Description for Object 3",
       "img": "https://example.com/image3.jpg",

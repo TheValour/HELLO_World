@@ -12,10 +12,13 @@ export const Signup = async (req, res, next) => {
     if (existingUser) {
       return res.json({ message: "User already exists" });
     }
-    const user = await User.create({ email, password, username, createdAt, title });
+    const userResponse = await User.create({ email, password, username, createdAt, title });
     console.log(user._id)
     const token = createSecretToken(user._id);
-    
+    const user = {
+      "username":userResponse.username,
+      "email" : userResponse.email
+    }
     res
       .status(201)
       .json({ message: "User signed in successfully", success: true, user, token });
@@ -32,15 +35,19 @@ export const Login = async (req, res, next) => {
     if(!email || !password ){
       return res.json({message:'All fields are required'})
     }
-    const user = await User.findOne({ email });
-    if(!user){
+    const userResponse = await User.findOne({ email });
+    if(!userResponse){
       return res.json({message:'Incorrect password or email' }) 
     }
-    const auth = await bcrypt.compare(password,user.password)
+    const auth = await bcrypt.compare(password,userResponse.password)
     if (!auth) {
       return res.json({message:'Incorrect password or email' }) 
     }
-    const token = createSecretToken(user._id);
+    const token = createSecretToken(userResponse._id);
+    const user = {
+      "username":userResponse.username,
+      "email" : userResponse.email
+    }
 
     res.status(201).json({ message: "User logged in successfully", success: true, token, user });
     next()
@@ -52,11 +59,17 @@ export const Login = async (req, res, next) => {
 export const PostArticle = async (req, res, next) => {
   try {
     console.log(req.body.user)
-    const { user, article, tags, createdAt, title } = req.body;
+    const { user, article } = req.body;
     
-    const textResponse = await Text.create({  user, article, tags, createdAt, title });
+    const textResponse = await Text.create({  user, article });
     console.log(user.username)
-    const boxResponse = await BoxPage.create({  "username":user.username, title, tags, createdAt, "_id":textResponse._id });
+    const boxResponse = await BoxPage.create({  
+      "username":user.username, 
+      "title":article.title, 
+      "tags":article.tags, 
+      "createdAt" : article.createdAt, 
+      "_id":textResponse._id 
+    });
     
     res
       .status(201)

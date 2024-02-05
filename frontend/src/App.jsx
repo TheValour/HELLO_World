@@ -9,30 +9,36 @@ import ArticleSection from './components/ArticleSection'
 import Write from './components/Write'
 import Register from './components/auth/Signup'
 import Login from './components/auth/Login'
-import { AuthContextProvider } from './context/AuthContext'
 import PublishForm from './components/Publish'
+
+import { AuthContextProvider } from './context/AuthContext'
+import { QuillContextProvider } from './context/QuillContext'
+import Read from './components/Read'
 
 function App() {
 
   return (
     <AuthContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/signup' element={<Register/>} />
-          <Route path='/login' element={<Login/>} />
-          <Route path='/publish' element={<PublishForm/>}/>
+      <QuillContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/signup' element={<Register/>} />
+            <Route path='/login' element={<Login/>} />
+            <Route path='/publish' element={<PublishForm/>}/>
 
-          <Route path='/' element={<Navbar/>} >
-            <Route  path='/' element={<Hero/>} >
-              <Route path='/article' element={<ArticleSection/>}/>
+            <Route path='/' element={<Navbar/>} >
+              <Route  path='/' element={<Hero/>} >
+                <Route path='/article' element={<ArticleSection/>}/>
+              </Route>
+
+              <Route path='/read/:id' element={<Read/>}/>
+              <Route path='/write' element={<Write/>}/>
             </Route>
-
-            <Route path='/write' element={<Write/>}/>
-          </Route>
-            
-          <Route path='*' element={<PageNotFound/>}/>
-        </Routes>
-      </BrowserRouter>
+              
+            <Route path='*' element={<PageNotFound/>}/>
+          </Routes>
+        </BrowserRouter>
+      </QuillContextProvider>
     </AuthContextProvider>
   )
 }

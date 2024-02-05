@@ -1,40 +1,38 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useContext} from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
 import { toolbarOptions } from "./setting";
+import { QuillContext } from "../../context/QuillContext";
+import { useNavigate } from "react-router-dom";
 
 export default function TextEditor() {
-  const [quill, setQuill] = useState();
-
-  const showRef = useRef();
-  const onClickHandler = () => {
-    showRef.current.textContent = ''
-    const editor = document.createElement("div");
-    showRef.current.append(editor);
-    
-    const showq = new Quill(editor, {
-      readOnly: true,
-      theme: "bubble",
-    });
-    showq.setContents(quill.getContents());
-  };
-
+  const navigate = useNavigate();
+  const {quill, setQuill} = useContext(QuillContext);
+  
   const wrapperRef = useCallback((wrapper) => {
     if (wrapper == null) return;
-
+    
     wrapper.innerHTML = "";
     const editor = document.createElement("div");
     wrapper.append(editor);
-
+    
     const q = new Quill(editor, {
       modules: {
         toolbar: toolbarOptions,
       },
       theme: "snow",
     });
-    setQuill(q);
-  }, []);
+    q.setContents(quill)
+    q.on("text-change", () => {
+      const saveQuill = q.getContents();
+      setQuill(saveQuill);
+    });
+  }, [setQuill]);
+  
+  function onClickHandler() {
+    navigate('/publish');
+  }
 
   return (
     <>
@@ -44,11 +42,6 @@ export default function TextEditor() {
       >
         Submit
       </button>
-      
-      <div className="ql-snow">
-        <div id="editor-container" ref={showRef}></div>
-      </div>
-      
     </>
   );
 }
