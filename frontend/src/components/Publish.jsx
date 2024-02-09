@@ -11,23 +11,18 @@ const PublishForm = () => {
   const navigate = useNavigate();
   const {user} = useContext(AuthContext);
   const { quill } = useContext(QuillContext);
-  // console.log(user)
+  console.log(user)
 
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     tags: '',
-    image: ''
   });
 
   // Update the state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const fileChangeHandler = (e) => {
-    setFormData({ ...formData, 'image' :e.target.files[0] });
-  };
-  
+  };  
   
   const handleError = (err) =>
     toast.error(err, {
@@ -49,7 +44,7 @@ const PublishForm = () => {
           tags: formData.tags.split(',').map(tag => tag.trim()),
           "quill":json, 
         };
-  
+
         const { data } = await axios.post( "http://localhost:3000/write",
           {
             "user":{
@@ -83,10 +78,8 @@ const PublishForm = () => {
     }
   };
   
-
-
   return (
-    <div className='flex-box flex-row items-center w-full h-full'>
+    <div className='flex-box flex-row items-center w-full h-full' >
       <div className='flex-box bg-gray-200 w-2/5 p-5 h-4/5'>
         <label className='text-xl'>Title:</label><br/>
         <input type="text" value={formData.title} onChange={handleChange} 
@@ -98,10 +91,6 @@ const PublishForm = () => {
       </div>
 
       <div className='flex-box w-2/5 border p-5 h-4/5'>
-        <label>Image</label><br/>
-        <input type="file" value={formData.image} onChange={fileChangeHandler} accept="image/*"
-          name="image" className='w-1/5 bg-slate-200 p-2'/><br/> 
-
         <label>Tags (comma-separated):</label><br/>
         <input type="text" value={formData.tags} onChange={handleChange}
           name="tags" className='w-4/5 bg-slate-200 p-2'/><br/> 

@@ -40,7 +40,6 @@ const Login = () => {
         { withCredentials: true }
       );
       const { success, message } = data;
-      console.log(data);
       if (success) {
         localStorage.setItem('token', data.token)
         setUser(data.user);
@@ -63,43 +62,47 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6 rounded-md shadow-md w-3/4 h-4/5">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Login Account</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="mb-4">
-          <label htmlFor="email" className="label-class">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter your email"
-            onChange={handleOnChange}
-            className="input-class"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="label-class">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter your password"
-            onChange={handleOnChange}
-            className="input-class"
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
-          Submit
-        </button>
-        <span className="text-gray-600 ml-5">
-          Don't have an account? <Link to={"/signup"} className="text-blue-500">Signup</Link>
-        </span>
-      </form>
-      <ToastContainer />
+    <div className="w-full h-full flex-box items-center">
+      <div className="bg-gray-100 p-6 rounded-md shadow-md w-1/2 h-4/5">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Login Account</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="mb-4">
+            <label htmlFor="email" className="label-class">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={handleOnChange}
+              className="input-class"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="label-class">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={handleOnChange}
+              className="input-class"
+            />
+          </div>
+          <div className="mt-12">
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+              Submit
+            </button>
+            <span className="text-gray-600 ml-5">
+              Don&apos;t have an account? <Link to={"/signup"} className="text-blue-500">Signup</Link>
+            </span>
+          </div>
+        </form>
+        <ToastContainer />
+      </div>
     </div>
   );
 };

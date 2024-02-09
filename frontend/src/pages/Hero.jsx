@@ -1,12 +1,10 @@
-import React from 'react'
-import HeroImg from '/images/hero1.png'
+import React from 'react';
 import { Link, Outlet } from 'react-router-dom'
 
-export default function() {
+const Hero = ()=> {
   return (
     <div>
-      <img src={HeroImg} alt="" />
-      <nav className='bg-green-100' id='category-link'>
+      <nav className='mt-3 p-2 border-b-2 border-gray-200' id='category-link'>
         <Link to="/article?cat=all">All</Link>
         <Link to='/article?cat=tech'>Tech</Link>
         <Link to='/article?cat=edu'>Edu</Link>
@@ -17,3 +15,4 @@ export default function() {
     </div>
   )
 }
+export default Hero;

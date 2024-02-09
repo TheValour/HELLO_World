@@ -13,6 +13,7 @@ export const PostArticle = async (req, res, next) => {
       "title":article.title, 
       "tags":article.tags, 
       "createdAt" : article.createdAt, 
+      "description" : article.description, 
       "_id":textResponse._id 
     });
     

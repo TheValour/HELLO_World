@@ -2,22 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Article from './Article';
-import data from '../data';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function ArticleSection() {
     const [param] = useSearchParams();
     const [list, setList] = useState([]);
     const categoryToFilter = param.get('cat');
     const [loading, setLoading] = useState(true);
-
+    
+    const handleError = (err) =>
+    toast.error(err, {
+      position: "top-right",
+    });
     useEffect(() => {
         const fetchlistData = async () => {
             try {
             const response = await axios.get(`http://localhost:3000/list/${categoryToFilter==='all'?'':categoryToFilter}`);
             const { data } = response;
             const { success, listResponse, message } = data;
-
+            console.log(listResponse)
             if (success) {
                console.log(listResponse)
                setList(listResponse)

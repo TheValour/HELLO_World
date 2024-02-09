@@ -5,10 +5,10 @@ const boxSchema = new mongoose.Schema({
     type: String,
     required: [true, "title is required"],
   },
-//   description: {
-//     type: String,
-//     required: [true, "desc is required"],
-//   },
+  description: {
+    type: String,
+    required: [true, "desc is required"],
+  },
   _id: {
     type:  Object,
     required: [true, "Id is required"],

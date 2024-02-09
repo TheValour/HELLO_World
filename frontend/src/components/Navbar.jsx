@@ -18,7 +18,7 @@ function Navbar() {
           { withCredentials: true }
         );
 
-        const { status, message, user } = data;
+        const { status, user } = data;
         // console.log(data);
         if (status) {
           if (!isMounted) {
@@ -50,10 +50,8 @@ function Navbar() {
 
   return (
     <> 
-      <div  className="navbar-container p-4 bg-slate-200">
-        <span className='image-left'>ATG WORLD</span>
-        <input type="text" name="" id="" className='bg-gray-100 w-3/12 rounded-xl placeholder:text-xs ' 
-          placeholder='Search for your favorite groups in ATG'/>
+      <div  className="navbar-container px-16 py-4 bg-slate-200 ">
+        <span className='image-left  font-semibold'>ATG WORLD</span>
         <div> 
           <span className='text-blue-700' id='its-free'>
           <Link to='/signup'>
