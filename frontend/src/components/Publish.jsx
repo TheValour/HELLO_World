@@ -5,12 +5,16 @@ import { QuillContext } from '../context/QuillContext';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
-
+import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
+import { storage } from './auth/firebase';
 
 const PublishForm = () => {
   const navigate = useNavigate();
   const {user} = useContext(AuthContext);
   const { quill } = useContext(QuillContext);
+  const [image, setImage] = useState();
+  const [sendImage, setSendImage] = useState(null);
+
   console.log(user)
 
   const [formData, setFormData] = useState({
@@ -33,16 +37,42 @@ const PublishForm = () => {
     position: "bottom-left",
   });
 
+  const uploadFile = async () => {
+    if (image === null) {
+      handleError("Please select an image");
+      return;
+    }
+    const imageRef = storageRef(storage, `products${Date()}`);
+
+    await uploadBytes(imageRef, image)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            setSendImage(url)
+          })
+          .catch((error) => {
+            handleError(error.message);
+          });
+      })
+      .catch((error) => {
+        handleError(error.message);
+      });
+  };
+
+
   const handlePublish = async () => {
     try {
+      await uploadFile()
+  
       if (formData.title && formData.description && formData.tags) {
         var json = JSON.stringify(quill);
-        console.log(json);
+        console.log(sendImage);
         const onPublish = {
           title: formData.title,
           description: formData.description,
           tags: formData.tags.split(',').map(tag => tag.trim()),
           "quill":json, 
+          'image':sendImage
         };
 
         const { data } = await axios.post( "http://localhost:3000/write",
@@ -93,6 +123,10 @@ const PublishForm = () => {
       <div className='flex-box w-2/5 border p-5 h-4/5'>
         <label>Tags (comma-separated):</label><br/>
         <input type="text" value={formData.tags} onChange={handleChange}
+          name="tags" className='w-4/5 bg-slate-200 p-2'/><br/> 
+        
+        <label>Image:</label><br/>
+        <input type="file" onChange={(e) => setImage(e.target.files[0])}
           name="tags" className='w-4/5 bg-slate-200 p-2'/><br/> 
 
         <button

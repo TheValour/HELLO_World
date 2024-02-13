@@ -25,6 +25,7 @@ function App() {
             <Route path='/signup' element={<Register/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/publish' element={<PublishForm/>}/>
+            <Route path='/write' element={<Write/>}/>
 
             <Route path='/' element={<Navbar/>} >
               <Route  path='/' element={<Hero/>} >
@@ -32,7 +33,6 @@ function App() {
               </Route>
 
               <Route path='/read/:id' element={<Read/>}/>
-              <Route path='/write' element={<Write/>}/>
             </Route>
               
             <Route path='*' element={<PageNotFound/>}/>

@@ -13,6 +13,9 @@ const boxSchema = new mongoose.Schema({
     type:  Object,
     required: [true, "Id is required"],
   },
+  image: {
+    type: String,
+  },
   tags: {
     type: [String],
     required: [true, "Your tags is required"],

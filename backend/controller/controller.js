@@ -7,13 +7,13 @@ export const PostArticle = async (req, res, next) => {
     const { user, article } = req.body;
     
     const textResponse = await Text.create({  user, article });
-    console.log(user.username)
     const boxResponse = await BoxPage.create({  
       "username":user.username, 
       "title":article.title, 
       "tags":article.tags, 
       "createdAt" : article.createdAt, 
       "description" : article.description, 
+      "image" : article.image, 
       "_id":textResponse._id 
     });
     

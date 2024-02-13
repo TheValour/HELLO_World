@@ -23,7 +23,6 @@ export default function ArticleSection() {
             const { success, listResponse, message } = data;
             console.log(listResponse)
             if (success) {
-               console.log(listResponse)
                setList(listResponse)
             } else {
                 handleError(message);
