@@ -13,6 +13,8 @@
 .ql-toolbar.ql-snow {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 10vh;
     background: rgb(230, 227, 227);
 }
 .ql-container.ql-snow {

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import {v4 as uuidv4} from 'uuid';
 import { QuillContext } from '../context/QuillContext';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
@@ -13,7 +13,6 @@ const PublishForm = () => {
   const {user} = useContext(AuthContext);
   const { quill } = useContext(QuillContext);
   const [image, setImage] = useState();
-  const [sendImage, setSendImage] = useState(null);
 
   console.log(user)
 
@@ -38,76 +37,48 @@ const PublishForm = () => {
   });
 
   const uploadFile = async () => {
-    if (image === null) {
-      handleError("Please select an image");
-      return;
-    }
-    const imageRef = storageRef(storage, `products${Date()}`);
-
-    await uploadBytes(imageRef, image)
-      .then((snapshot) => {
-        getDownloadURL(snapshot.ref)
-          .then((url) => {
-            setSendImage(url)
-          })
-          .catch((error) => {
-            handleError(error.message);
-          });
-      })
-      .catch((error) => {
-        handleError(error.message);
-      });
-  };
-
-
-  const handlePublish = async () => {
     try {
-      await uploadFile()
+      const imageRef = storageRef(storage, uuidv4());
+      const snapshot = await uploadBytes(imageRef, image);
+      const url = await getDownloadURL(snapshot.ref);
+      
+      const json = JSON.stringify(quill);
+      const onPublish = {
+        title: formData.title,
+        description: formData.description,
+        tags: formData.tags.split(',').map(tag => tag.trim()),
+        "quill": json,
+        'image': url
+      };
   
-      if (formData.title && formData.description && formData.tags) {
-        var json = JSON.stringify(quill);
-        console.log(sendImage);
-        const onPublish = {
-          title: formData.title,
-          description: formData.description,
-          tags: formData.tags.split(',').map(tag => tag.trim()),
-          "quill":json, 
-          'image':sendImage
-        };
-
-        const { data } = await axios.post( "http://localhost:3000/write",
-          {
-            "user":{
-              "username":user.username,
-              "email": user.email,
-            },
-            article: {
-              ...onPublish,
-              "createdAt":new Date()
-            },
-          },
-        );
+      const { data } = await axios.post("http://localhost:3000/write", {
+        "user": {
+          "username": user.username,
+          "email": user.email,
+        },
+        article: {
+          ...onPublish,
+          "createdAt": new Date()
+        },
+      });
   
-        const { success, message } = data;
+      const { success, message } = data;
   
-        if (success) {
-          handleSuccess(message);
-          setTimeout(() => {
-            navigate("/");
-          }, 1500);
-        } else {
-          handleError(message);
-        }
-  
-        setFormData({ title: '', description: '', tags: '' });
+      if (success) {
+        handleSuccess(message);
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       } else {
-        console.error('Please fill in all fields');
+        handleError(message);
       }
+  
+      setFormData({ title: '', description: '', tags: '' });
     } catch (error) {
-      console.error('An error occurred:', error);
+      handleError(error.message);
     }
   };
-  
+    
   return (
     <div className='flex-box flex-row items-center w-full h-full' >
       <div className='flex-box bg-gray-200 w-2/5 p-5 h-4/5'>
@@ -123,14 +94,14 @@ const PublishForm = () => {
       <div className='flex-box w-2/5 border p-5 h-4/5'>
         <label>Tags (comma-separated):</label><br/>
         <input type="text" value={formData.tags} onChange={handleChange}
-          name="tags" className='w-4/5 bg-slate-200 p-2'/><br/> 
+          name="tags" className='w-4/5 bg-slate-200 p-2' required/><br/> 
         
         <label>Image:</label><br/>
         <input type="file" onChange={(e) => setImage(e.target.files[0])}
-          name="tags" className='w-4/5 bg-slate-200 p-2'/><br/> 
+          name="tags" className='w-4/5 bg-slate-200 p-2' required/><br/> 
 
         <button
-          onClick={handlePublish}
+          onClick={uploadFile}
           className='bg-green-300 w-1/5 p-1 rounded-sm'
         >
           Publish

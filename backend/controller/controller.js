@@ -1,5 +1,6 @@
 import Text from '../modal/ArticleModal.js';
 import BoxPage from '../modal/BoxModal.js';
+import TagList from '../modal/TagsModal.js';
 
 export const PostArticle = async (req, res, next) => {
   try {
@@ -16,12 +17,14 @@ export const PostArticle = async (req, res, next) => {
       "image" : article.image, 
       "_id":textResponse._id 
     });
-    
-    res
-      .status(201)
-      .json({ message: "User article posted successfully", success: true, textResponse });
-    next();
 
+    insertTags(article.tags);
+
+    res
+    .status(201)
+    .json({ message: "User article posted successfully", success: true, textResponse });
+    next();
+    
   }catch (error) {
     console.error(error);
   }
@@ -62,3 +65,26 @@ export const FindTag = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", success: false });
   }
 };
+export const TagListControl = async (req, res) => {
+  try {
+    const listResponse = await TagList.find().sort({count:-1}).limit(10)
+    res.status(200).json({ message: "User article Find", success: true, listResponse });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", success: false });
+  }
+};
+
+const insertTags = async (tags) => {
+  for(let  i=0; i<tags.length; i++) {
+    const searchResponse = await TagList.find({'title':tags[i]})
+
+    if(searchResponse.length) {
+      await TagList.updateOne({'title':tags[i]}, {'count': searchResponse[0].count + 1});
+    }
+    else {
+      await TagList.create({'title':tags[i], 'count': 1});
+    }
+  }
+}
