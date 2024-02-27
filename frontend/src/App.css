@@ -18,8 +18,11 @@
     background: rgb(230, 227, 227);
 }
 .ql-container.ql-snow {
-    height: 75vh;
-    background: rgb(247, 246, 246);
+    height: 80vh;
+}
+.ql-editor {
+    font-size: 3vh;
+    color: rgb(26, 24, 24);
 }
 
 .flex-box {

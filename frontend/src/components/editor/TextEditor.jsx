@@ -5,6 +5,7 @@ import "quill/dist/quill.snow.css";
 import { toolbarOptions } from "./setting";
 import { QuillContext } from "../../context/QuillContext";
 import { useNavigate } from "react-router-dom";
+import EditorHeader from "./EditorHeader";
 
 export default function TextEditor() {
   const navigate = useNavigate();
@@ -36,12 +37,10 @@ export default function TextEditor() {
 
   return (
     <>
-      <div id="editor-container" ref={wrapperRef}></div>
-      <button className="bg-green-400" 
-        onClick={onClickHandler}
-      >
-        Submit
-      </button>
+      <span className="flex flex-col items-center justify-center ">
+        <EditorHeader onClickHandler={onClickHandler}/>
+        <div id="editor-container" className="w-11/12" ref={wrapperRef}></div>
+      </span>
     </>
   );
 }

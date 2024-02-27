@@ -18,7 +18,7 @@ const TagsBar = ()=> {
   ));
     
   return (
-    <div className='sticky top-0 z-10 bg-yellow-600'>
+    <div className='sticky top-0 z-10 bg-green-200'>
       <nav className='mt-3 p-2 border-b-2 border-gray-200 ' id='category-link'>
         <Link to="/article?cat=all">All</Link>
         {tagList}

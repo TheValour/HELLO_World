@@ -1,12 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 export default function SideSection() {
+  const navigate = useNavigate();
   const [tags, setTags] = useState([]);
-  function onClickHandler(e) {
-    console.log("Helo")
-    console.log(e.target.value)
+  const [searchTag, setSearchTag] = useState("");
+  
+  function onKeyPress(e) {
+    if(e.key === 'Enter' && searchTag){
+      navigate(`/article?cat=${searchTag}`)
+      setSearchTag("");
+    }
+  }
+  function onClickHandler() {
+    if(searchTag) {
+      navigate(`/article?cat=${searchTag}`)
+      setSearchTag("");
+    }
   }
 
   useEffect(() => {
@@ -29,7 +42,13 @@ export default function SideSection() {
   return (
     <div className='w-1/3 mt-3'>
       <div className='bg-blue-100 p-4 h-screen w-full sticky top-0'>
-        <input type="text" name="" id="" className='h-8 ' onClick={onClickHandler}/><span>-&gt;</span><br/><br/>
+        <input type="text" name="" id="" className='h-8 'value={searchTag} 
+          onChange={(e) => setSearchTag(e.target.value)} onKeyDown={onKeyPress} 
+        />
+        <span className=' text-white p-2 bg-gray-400  cursor-pointer' onClick={onClickHandler}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />  
+        </span>       
+        <br/><br/>
         {tagList}
       </div>
     </div>
