@@ -9,7 +9,6 @@ export default function Read() {
   const { id } = useParams();
   const [quillContent, setQuillContent] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(id,  "hello")
   const handleError = (err) =>
     toast.error(err, {
       position: "top-right",

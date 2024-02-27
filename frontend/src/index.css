@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 #root{
+    overflow-x: hidden;
     font-family: "Comfortaa", sans-serif;
     height: 100vh;
     width: 100vw;

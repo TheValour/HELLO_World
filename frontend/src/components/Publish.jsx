@@ -11,7 +11,7 @@ import { storage } from './auth/firebase';
 const PublishForm = () => {
   const navigate = useNavigate();
   const {user} = useContext(AuthContext);
-  const { quill } = useContext(QuillContext);
+  const { quill, setQuill } = useContext(QuillContext);
   const [image, setImage] = useState();
 
   console.log(user)
@@ -72,7 +72,7 @@ const PublishForm = () => {
       } else {
         handleError(message);
       }
-  
+      setQuill(null);
       setFormData({ title: '', description: '', tags: '' });
     } catch (error) {
       handleError(error.message);
