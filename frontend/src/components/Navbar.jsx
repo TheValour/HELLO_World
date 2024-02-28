@@ -13,7 +13,7 @@ function Navbar() {
       const token = localStorage.getItem('token');
       try {
         const { data } = await axios.post(
-          "http://localhost:3000/",
+          `${import.meta.env.VITE_LINK}`,
           { token },
           { withCredentials: true }
         );

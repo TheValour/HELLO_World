@@ -6,8 +6,8 @@ const TagsBar = ()=> {
   const [tags, setTags] = useState([]);
   useEffect(() => {
     async function fetchlistData(){
-      const response = await axios.get(`http://localhost:3000/taglist`);
-      console.log(response.data.listResponse)
+      // backend call
+      const response = await axios.get(`${import.meta.env.VITE_LINK}/taglist`);
       setTags(response.data.listResponse);
     }
     fetchlistData();

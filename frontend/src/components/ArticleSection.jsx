@@ -18,7 +18,8 @@ export default function ArticleSection() {
     useEffect(() => {
         const fetchlistData = async () => {
             try {
-            const response = await axios.get(`http://localhost:3000/list/${categoryToFilter==='all'?'':categoryToFilter}`);
+            //backend call
+            const response = await axios.get(`${import.meta.env.VITE_LINK}/list/${categoryToFilter==='all'?'':categoryToFilter}`);
             const { data } = response;
             const { success, listResponse, message } = data;
             console.log(listResponse)

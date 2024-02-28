@@ -50,8 +50,9 @@ const PublishForm = () => {
         "quill": json,
         'image': url
       };
-  
-      const { data } = await axios.post("http://localhost:3000/write", {
+      
+      // backend - call
+      const { data } = await axios.post(`${import.meta.env.VITE_LINK}/write`, {
         "user": {
           "username": user.username,
           "email": user.email,

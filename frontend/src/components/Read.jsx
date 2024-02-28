@@ -18,7 +18,8 @@ export default function Read() {
   useEffect(() => {
     const fetchQuillContent = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/read/${id}`);
+        // backend call
+        const response = await axios.get(`${import.meta.env.VITE_LINK}/read/${id}`);
         const { data } = response;
         const { success, postResponse, message } = data;
 

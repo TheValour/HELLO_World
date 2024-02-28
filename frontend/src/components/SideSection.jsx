@@ -24,7 +24,8 @@ export default function SideSection() {
 
   useEffect(() => {
     async function fetchlistData(){
-      const response = await axios.get(`http://localhost:3000/taglist`);
+      // backend call
+      const response = await axios.get(`${import.meta.env.VITE_LINK}/taglist`);
       console.log(response.data.listResponse)
       setTags(response.data.listResponse);
     }
