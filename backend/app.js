@@ -33,8 +33,5 @@ mongoose
     }
 );
 
-app.use('/', (req, res) => {
-  res.send('server is running');
-});
 app.use("/", authRoute);
 
