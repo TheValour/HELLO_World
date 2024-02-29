@@ -16,7 +16,7 @@ import { QuillContextProvider } from './context/QuillContext'
 import Read from './components/Read'
 
 function App() {
-
+  console.log(import.meta.env.VITE_LINK);
   return (
     <AuthContextProvider>
       <QuillContextProvider>
