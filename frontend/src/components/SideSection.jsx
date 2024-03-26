@@ -34,7 +34,7 @@ export default function SideSection() {
 
   const tagList = tags.map((ele) => (
     <Link key={ele._id} to={`/article?cat=${ele.title}`} 
-      className='bg-gray-100 h-8 m-4 p-2'
+      className='bg-gray-100 mx-2 p-2'
     >
       {ele.title}
     </Link>
@@ -43,14 +43,17 @@ export default function SideSection() {
   return (
     <div className='w-1/3 mt-3'>
       <div className='bg-blue-100 p-4 h-screen w-full sticky top-0'>
-        <input type="text" name="" id="" className='h-8 'value={searchTag} 
-          onChange={(e) => setSearchTag(e.target.value)} onKeyDown={onKeyPress} 
-        />
-        <span className=' text-white p-2 bg-gray-400  cursor-pointer' onClick={onClickHandler}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />  
-        </span>       
-        <br/><br/>
-        {tagList}
+        <div className='mb-5'>
+          <input type="text" name="" id="" className='h-8' value={searchTag} 
+            onChange={(e) => setSearchTag(e.target.value)} onKeyDown={onKeyPress} 
+            />
+          <span className=' text-white p-2 bg-gray-400  cursor-pointer' onClick={onClickHandler}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />  
+          </span>       
+        </div>
+        <div className='w-full  h-auto'>
+          {tagList}
+        </div>
       </div>
     </div>
   )
