@@ -1,4 +1,4 @@
-import React, { useCallback, useContext} from "react";
+import React, { useCallback, useContext, useState} from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
@@ -10,7 +10,8 @@ import EditorHeader from "./EditorHeader";
 export default function TextEditor() {
   const navigate = useNavigate();
   const {quill, setQuill} = useContext(QuillContext);
-  
+  const [flag, setFlag] = useState(true)
+
   const wrapperRef = useCallback((wrapper) => {
     if (wrapper == null) return;
     
@@ -28,6 +29,7 @@ export default function TextEditor() {
     q.on("text-change", () => {
       const saveQuill = q.getContents();
       setQuill(saveQuill);
+      setFlag(q.getLength() < 500);
     });
   }, [setQuill]);
   
@@ -38,7 +40,7 @@ export default function TextEditor() {
   return (
     <>
       <span className="flex flex-col items-center justify-center ">
-        <EditorHeader onClickHandler={onClickHandler}/>
+        <EditorHeader onClickHandler={onClickHandler} flag={flag}/>
         <div id="editor-container" className="w-11/12" ref={wrapperRef}></div>
       </span>
     </>

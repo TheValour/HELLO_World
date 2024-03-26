@@ -14,7 +14,7 @@ const PublishForm = () => {
   const { quill, setQuill } = useContext(QuillContext);
   const [image, setImage] = useState();
 
-  console.log(user)
+  // console.log(user)
 
   const [formData, setFormData] = useState({
     title: '',
@@ -28,9 +28,9 @@ const PublishForm = () => {
   };  
   
   const handleError = (err) =>
-    toast.error(err, {
-      position: "top-right",
-    });
+  toast.error(err, {
+    position: "top-right",
+  });
   const handleSuccess = (msg) =>
   toast.success(msg, {
     position: "bottom-left",
@@ -79,17 +79,21 @@ const PublishForm = () => {
       handleError(error.message);
     }
   };
-    
+  console.log(formData.title.length)
   return (
     <div className='flex-box flex-row items-center w-full h-full' >
       <div className='flex-box bg-gray-200 w-2/5 p-5 h-4/5'>
         <label className='text-xl'>Title:</label><br/>
-        <input type="text" value={formData.title} onChange={handleChange} 
-          name="title" className='w-4/5 border-none p-2' required/><br/>
+        {formData.title.length <= 30 && <span className='text-xs text-red-400'> have more than 30 char</span>}
+        <input type="text" value={formData.title} 
+          onChange={handleChange} name="title" 
+          className={`w-4/5 border-none p-2 outline-${formData.title.length>30?'green':'red'}-500`} required
+          /><br/>
 
         <label>Write a short Description:</label><br/>
+        {formData.description.length <= 50 && <span className='text-xs text-red-400'> have more than 50 char</span>}
         <textarea value={formData.description} onChange={handleChange} 
-          name="description" className='w-4/5 h-1/6 p-2' required/>
+          name="description" className="w-4/5 h-1/6 p-2" required/>
       </div>
 
       <div className='flex-box w-2/5 border p-5 h-4/5'>
@@ -104,6 +108,7 @@ const PublishForm = () => {
         <button
           onClick={uploadFile}
           className='bg-green-300 w-1/5 p-1 rounded-sm'
+          disabled={formData.description.length < 50 || formData.title.length <= 30}
         >
           Publish
         </button>

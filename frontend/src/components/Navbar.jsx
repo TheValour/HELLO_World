@@ -53,7 +53,7 @@ function Navbar() {
       <div  className="navbar-container px-16 py-4 bg-slate-200 ">
         <div className='flex flex-col text-center'>
           <span className='font-semibold'>MKDIR </span>
-          <span className='text-xs font-normal'>a rich text editor</span>
+          <span className='text-xs font-normal text-blue-700'>a rich text editor</span>
         </div>
         <div> 
           <span className='text-blue-700' id='its-free'>

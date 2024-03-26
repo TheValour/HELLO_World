@@ -33,11 +33,13 @@ export default function SideSection() {
   }, []);
 
   const tagList = tags.map((ele) => (
-    <Link key={ele._id} to={`/article?cat=${ele.title}`} 
-      className='bg-gray-100 mx-2 p-2'
-    >
-      {ele.title}
-    </Link>
+    <span key={ele._id}>
+      <Link  to={`/article?cat=${ele.title}`} 
+        className='bg-gray-100 mx-2 p-2'
+        >
+        {ele.title}
+      </Link>
+    </span>
   ));
 
   return (
@@ -51,7 +53,7 @@ export default function SideSection() {
             <FontAwesomeIcon icon={faMagnifyingGlass} />  
           </span>       
         </div>
-        <div className='w-full  h-auto'>
+        <div id='tagList' className='overflow-hidden h-auto w-full'>
           {tagList}
         </div>
       </div>

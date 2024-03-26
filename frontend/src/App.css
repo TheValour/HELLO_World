@@ -30,7 +30,3 @@
     justify-content: center;
     flex-direction: column;
 }
-input {
-    outline-width: 1px;
-    outline-color: rgb(148, 239, 148);
-}
