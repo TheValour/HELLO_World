@@ -9,7 +9,7 @@ import EditorHeader from "./EditorHeader";
 
 export default function TextEditor() {
   const navigate = useNavigate();
-  const {quill, setQuill} = useContext(QuillContext);
+  const {quill, setQuill, setCount} = useContext(QuillContext);
   const [flag, setFlag] = useState(true)
 
   const wrapperRef = useCallback((wrapper) => {
@@ -30,6 +30,7 @@ export default function TextEditor() {
       const saveQuill = q.getContents();
       setQuill(saveQuill);
       setFlag(q.getLength() < 500);
+      setCount(q.getLength());
     });
   }, [setQuill]);
   

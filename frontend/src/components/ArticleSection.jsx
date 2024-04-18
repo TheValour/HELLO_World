@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 export default function ArticleSection() {
     const [param] = useSearchParams();
     const [list, setList] = useState([]);
-    const categoryToFilter = param.get('cat');
     const [loading, setLoading] = useState(true);
+    let categoryToFilter = param.get('cat');
     
     const handleError = (err) =>
     toast.error(err, {
@@ -19,6 +19,7 @@ export default function ArticleSection() {
         const fetchlistData = async () => {
             try {
             //backend call
+            if(categoryToFilter === null) categoryToFilter = 'all';
             const response = await axios.get(`${import.meta.env.VITE_LINK}/list/${categoryToFilter==='all'?'':categoryToFilter}`);
             const { data } = response;
             const { success, listResponse, message } = data;

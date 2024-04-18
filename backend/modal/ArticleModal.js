@@ -24,6 +24,9 @@ const textSchema = new mongoose.Schema({
     image:{
       type: String,
     },
+    artLength:{
+      type: String,
+    },
     tags: {
       type: [String],
       required: [true, "Article tag is required"],

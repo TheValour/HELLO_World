@@ -11,7 +11,7 @@ import { storage } from './auth/firebase';
 const PublishForm = () => {
   const navigate = useNavigate();
   const {user} = useContext(AuthContext);
-  const { quill, setQuill } = useContext(QuillContext);
+  const { quill, setQuill, count } = useContext(QuillContext);
   const [image, setImage] = useState();
 
   // console.log(user)
@@ -48,6 +48,7 @@ const PublishForm = () => {
         description: formData.description,
         tags: formData.tags.split(',').map(tag => tag.trim()),
         "quill": json,
+        "artLength": count,
         'image': url
       };
       

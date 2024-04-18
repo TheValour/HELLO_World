@@ -12,6 +12,7 @@ export const PostArticle = async (req, res, next) => {
       "username":user.username, 
       "title":article.title, 
       "tags":article.tags, 
+      "artLength":article.artLength, 
       "createdAt" : article.createdAt, 
       "description" : article.description, 
       "image" : article.image, 

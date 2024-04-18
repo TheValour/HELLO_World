@@ -9,6 +9,9 @@ const boxSchema = new mongoose.Schema({
     type: String,
     required: [true, "desc is required"],
   },
+  artLength: {
+    type: String,
+  },
   _id: {
     type:  Object,
     required: [true, "Id is required"],
