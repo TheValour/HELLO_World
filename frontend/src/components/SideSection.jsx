@@ -46,7 +46,7 @@ export default function SideSection() {
     <div className='w-1/3 mt-3'>
       <div className='bg-blue-100 p-4 h-screen w-full sticky top-0'>
         <div className='mb-5'>
-          <input type="text" name="" id="" className='h-8' value={searchTag} 
+          <input type="text" name="" id="" className='pl-2 h-8' value={searchTag} 
             onChange={(e) => setSearchTag(e.target.value)} onKeyDown={onKeyPress} 
             />
           <span className=' text-white p-2 bg-gray-400  cursor-pointer' onClick={onClickHandler}>

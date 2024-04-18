@@ -16,7 +16,7 @@ const Article = ({ data }) => {
                     </Link>
                     <div>
                         <span className='text-xs mr-4'>{Math.floor(data.artLength / 100) + 1} min</span>
-                        <span className='text-xs'>{data.likes} ✅</span>
+                        <span className='text-xs'>{Math.floor(data.likes)} ✅</span>
                     </div>
                 </div>
                 <img src={data.image} alt={data.title} className='w-24'/>

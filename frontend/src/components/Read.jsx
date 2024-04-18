@@ -67,7 +67,7 @@ export default function Read() {
   );
 
   return (
-    <div className='py-4 pb-24'>
+    <div className='py-4 pb-10'>
       <div className=' flex items-center flex-col text-2xl py-5 font-semibold'>
         <h2 className='py-4'>{detail.title}</h2>
         <img src={detail.image} alt={detail.title} className='w-96'/>
@@ -77,6 +77,10 @@ export default function Read() {
         <div id="editor-container" ref={showRef}></div>
       </div>
       {tags}
+
+      <div className='mt-20 ml-4'>
+        author <span className='text-blue-600'>{detail.username}</span>
+      </div>
     </div>
   );
 }
