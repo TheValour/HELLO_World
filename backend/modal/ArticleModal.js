@@ -15,21 +15,6 @@ const textSchema = new mongoose.Schema({
     quill:{
       type: String,
       required: [true, "Required"],
-
-    },
-    title:{
-      type: String,
-      required: [true, "title is Required"],
-    },
-    image:{
-      type: String,
-    },
-    artLength:{
-      type: String,
-    },
-    tags: {
-      type: [String],
-      required: [true, "Article tag is required"],
     },
     createdAt: {
       type: Date,

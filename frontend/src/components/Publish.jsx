@@ -49,6 +49,7 @@ const PublishForm = () => {
         tags: formData.tags.split(',').map(tag => tag.trim()),
         "quill": json,
         "artLength": count,
+        "likes": 1,
         'image': url
       };
       

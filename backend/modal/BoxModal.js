@@ -12,12 +12,11 @@ const boxSchema = new mongoose.Schema({
   artLength: {
     type: String,
   },
-  _id: {
-    type:  Object,
-    required: [true, "Id is required"],
-  },
   image: {
     type: String,
+  },
+  likes: {
+    type: Number,
   },
   tags: {
     type: [String],

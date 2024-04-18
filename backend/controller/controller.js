@@ -15,6 +15,7 @@ export const PostArticle = async (req, res, next) => {
       "artLength":article.artLength, 
       "createdAt" : article.createdAt, 
       "description" : article.description, 
+      "likes" : article.likes, 
       "image" : article.image, 
       "_id":textResponse._id 
     });
@@ -34,9 +35,12 @@ export const PostArticle = async (req, res, next) => {
 export const FindArticle = async (req, res) => {
   try {
     const _id = req.params.id;
-    console.log(_id)
-    const postResponse = await Text.findOne({ _id });    
-    res.status(200).json({ message: "User article", success: true, postResponse });
+
+    const postResponse = await Text.findOne({ _id });  
+    const postDetail = await BoxPage.findByIdAndUpdate(_id, { $inc: { likes: 0.5 } });    
+    // console.log(resBox);
+
+    res.status(200).json({ message: "User article", success: true, "item" : {postResponse, postDetail} });
 
   } catch (error) {
     console.error(error);
