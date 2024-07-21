@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
-import { QuillContext } from '../context/QuillContext';
-import { AuthContext } from '../context/AuthContext';
+import { QuillContext } from '../../context/QuillContext';
+import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
-import { storage } from './auth/firebase';
+import { storage } from '../auth/firebase';
 
 const PublishForm = () => {
   const navigate = useNavigate();

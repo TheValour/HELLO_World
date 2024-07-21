@@ -1,7 +1,7 @@
 import React from 'react';
-import TagsBar from '../components/TagsBar';
-import ArticleSection from '../components/ArticleSection';
-import SideSection from '../components/SideSection';
+import TagsBar from '../navbar/TagsBar';
+import ArticleSection from './ArticleSection';
+import SideSection from './SideSection';
 
 const Hero = ()=> {
 
