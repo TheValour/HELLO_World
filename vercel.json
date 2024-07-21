@@ -1,5 +1,9 @@
 {
   "rewrites":  [
+    {
+      "source": "/read/:path*",
+      "destination": "/read/:path*"
+    },
     {"source": "/(.*)", "destination": "/"}
   ]
 }
