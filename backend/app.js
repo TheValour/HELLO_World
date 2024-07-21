@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { authRoute } from './controller/routes.js';
+import { authRoute } from './route/routes.js';
 import cors from 'cors'
 
 import dotenv from 'dotenv';

@@ -1,5 +1,6 @@
-import { userVerification, Login, Signup } from "./AuthMiddleware.js";
-import {FindArticle, PostArticle, FindList, FindTag, TagListControl } from "./controller.js";
+import { Login, Signup } from "../controller/authController.js";
+import { userVerification } from "../controller/AuthMiddleware.js";
+import {FindArticle, PostArticle, FindList, FindTag, TagListControl } from "../controller/controller.js";
 import { Router } from 'express';
 const router = Router();
 

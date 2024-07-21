@@ -5,8 +5,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { AuthContext } from "../../context/AuthContext";
+import { APIContext } from "../../context/api";
 
 const Login = () => {
+  const {loginUser} = useContext(APIContext);
   const {setUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
@@ -34,11 +36,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post( `${import.meta.env.VITE_LINK}/login`, {
-          ...inputValue,
-        },
-        { withCredentials: true }
-      );
+      const { data } = await loginUser(inputValue);
+      
       const { success, message } = data;
       if (success) {
         localStorage.setItem('token', data.token)

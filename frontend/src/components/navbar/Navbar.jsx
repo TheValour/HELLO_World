@@ -2,29 +2,24 @@ import React, { useContext, useEffect } from 'react';
 import './Navbar.css';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import axios from 'axios';
+import { APIContext } from '../../context/api';
 
 function Navbar() {
+  const {verifyUser} = useContext(APIContext);
   const {user, setUser} = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem('token');
       try {
-        const { data } = await axios.post(
-          `${import.meta.env.VITE_LINK}`,
-          { token },
-          { withCredentials: true }
-        );
+        const data = await verifyUser();
 
         const { status, user } = data;
-        // console.log(data);
         if (status) {
           if (!isMounted) {
             return;
           }
-
+          console.log()
           setUser(user);
           setTimeout(() => {
             navigate("/");

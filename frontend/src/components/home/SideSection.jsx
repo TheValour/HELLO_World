@@ -1,14 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { APIContext } from '../../context/api';
 
 export default function SideSection() {
+  const {getTagList} = useContext(APIContext);
   const navigate = useNavigate();
   const [tags, setTags] = useState([]);
   const [searchTag, setSearchTag] = useState("");
-  
+
   function onKeyPress(e) {
     if(e.key === 'Enter' && searchTag){
       navigate(`/article?cat=${searchTag}`)
@@ -25,7 +26,7 @@ export default function SideSection() {
   useEffect(() => {
     async function fetchlistData(){
       // backend call
-      const response = await axios.get(`${import.meta.env.VITE_LINK}/taglist`);
+      const response = await getTagList();
       console.log(response.data.listResponse)
       setTags(response.data.listResponse);
     }

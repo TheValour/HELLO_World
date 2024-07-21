@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-
-import Article from './Article';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 
+import Article from './Article';
+import { APIContext } from '../../context/api';
+
 export default function ArticleSection() {
+    const {getArticleList} = useContext(APIContext);
+
     const [param] = useSearchParams();
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,7 +22,8 @@ export default function ArticleSection() {
             try {
             //backend call
             if(categoryToFilter === null) categoryToFilter = 'all';
-            const response = await axios.get(`${import.meta.env.VITE_LINK}/list/${categoryToFilter==='all'?'':categoryToFilter}`);
+            const response = await getArticleList(categoryToFilter);
+
             const { data } = response;
             const { success, listResponse, message } = data;
             console.log(listResponse)

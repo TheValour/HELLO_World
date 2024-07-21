@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { toast } from 'react-toastify';
+import { APIContext } from '../../context/api';
 
 export default function Read() {
+  const {readArticle} = useContext(APIContext);
+
   const { id } = useParams();
   const [quillContent, setQuillContent] = useState(null);
   const [detail, setDetail] = useState({});
@@ -20,8 +22,9 @@ export default function Read() {
   useEffect(() => {
     const fetchQuillContent = async () => {
       try {
-        // backend call
-        const response = await axios.get(`${import.meta.env.VITE_LINK}/read/${id}`);
+        // API call
+        const response = await readArticle(id);
+
         const { data } = response;
         const { success, item, message } = data;
         const {postResponse, postDetail} = item;

@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
 import { QuillContext } from '../../context/QuillContext';
 import { AuthContext } from '../../context/AuthContext';
-import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
 import { storage } from '../auth/firebase';
+import { APIContext } from '../../context/api';
 
 const PublishForm = () => {
   const navigate = useNavigate();
+  const {publishArticle} = useContext(APIContext);
   const {user} = useContext(AuthContext);
   const { quill, setQuill, count } = useContext(QuillContext);
   const [image, setImage] = useState();
@@ -53,17 +54,8 @@ const PublishForm = () => {
         'image': url
       };
       
-      // backend - call
-      const { data } = await axios.post(`${import.meta.env.VITE_LINK}/write`, {
-        "user": {
-          "username": user.username,
-          "email": user.email,
-        },
-        article: {
-          ...onPublish,
-          "createdAt": new Date()
-        },
-      });
+      // api - call
+      const { data } = await publishArticle(user, onPublish);
   
       const { success, message } = data;
   

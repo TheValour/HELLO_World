@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { AuthContext } from "../../context/AuthContext";
+import { APIContext } from "../../context/api";
 
 const Register = () => {
+  const { registerUser } = useContext(APIContext);
   const { setUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
@@ -35,11 +36,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post( `${import.meta.env.VITE_LINK}/signup`, {
-          ...inputValue,
-        },
-        { withCredentials: true }
-      );
+      const { data } = registerUser(inputValue);
       const { success, message } = data;
       
       if (success) {

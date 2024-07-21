@@ -1,13 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link} from 'react-router-dom'
+import { APIContext } from '../../context/api';
 
 const TagsBar = ()=> {
+  const {getTagList} = useContext(APIContext);
+
   const [tags, setTags] = useState([]);
   useEffect(() => {
     async function fetchlistData(){
       // backend call
-      const response = await axios.get(`${import.meta.env.VITE_LINK}/taglist`);
+      const response = await getTagList();
       setTags(response.data.listResponse);
     }
     fetchlistData();
