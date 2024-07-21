@@ -1,5 +1,6 @@
 {
     "version": 2,
     "builds": [{"src": "*.js", "use": "@vercel/node"}],
-    "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+    "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }],
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
