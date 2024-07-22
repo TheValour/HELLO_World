@@ -75,7 +75,7 @@ const PublishForm = () => {
   };
   console.log(formData.title.length)
   return (
-    <div className='flex-box flex-row items-center w-full h-full' >
+    <div className='flex justify-center flex-row items-center w-full h-full' >
       <div className='flex-box bg-gray-200 w-2/5 p-5 h-4/5'>
         <label className='text-xl'>Title:</label><br/>
         {formData.title.length <= 30 && <span className='text-xs text-red-400'> have more than 30 char</span>}
