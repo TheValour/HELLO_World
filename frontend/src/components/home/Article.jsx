@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye  } from '@fortawesome/free-solid-svg-icons';
 
 const Article = ({ data }) => {
     const tags = data.tags.map((ele, index) =>
@@ -15,8 +17,10 @@ const Article = ({ data }) => {
                         <h2 className=" text-sm mb-8 text-gray-800">{data.description}</h2>
                     </Link>
                     <div>
-                        <span className='text-xs mr-4'>{Math.floor(data.artLength / 100) + 1} min</span>
-                        <span className='text-xs'>{Math.floor(data.likes)} ✅</span>
+                        <span className='text-xs mr-4'>{Math.floor(data.artLength / 200) + 1} min</span>
+                        <span className='text-xs'>
+                            {Math.floor(data.likes)} <span className='text-xs text-gray-700'> <FontAwesomeIcon icon={faEye} /> </span>
+                        </span>
                     </div>
                 </div>
                 <img src={data.image} alt={data.title} className='w-24'/>

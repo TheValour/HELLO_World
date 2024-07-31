@@ -9,8 +9,8 @@ import ArticleSection from './components/home/ArticleSection'
 import Write from './components/feature/Write'
 import Read from './components/feature/Read'
 import PublishForm from './components/feature/Publish'
-import PageNotFound from './components/PageNotFound'
-import UserProfile from './components/UserProfile'
+import PageNotFound from './components/util/PageNotFound'
+import UserProfile from './components/profile/UserProfile'
 
 function App() {
   return (

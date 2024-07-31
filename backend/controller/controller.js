@@ -50,6 +50,19 @@ export const FindArticle = async (req, res) => {
   }
 };
 
+export const getArticleById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const postResponse = await BoxPage.findOne({ _id : id });  
+    
+    res.status(200).json({ message: "Get article by id", success: true, "item" : {postResponse} });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", success: false });
+  }
+};
+
 export const FindList = async (req, res) => {
   try {
     const listResponse = await BoxPage.find().limit(50)
