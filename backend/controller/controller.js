@@ -1,5 +1,6 @@
 import Text from '../modal/ArticleModal.js';
 import BoxPage from '../modal/BoxModal.js';
+import User from '../modal/Model.js';
 import TagList from '../modal/TagsModal.js';
 
 export const PostArticle = async (req, res, next) => {
@@ -20,6 +21,7 @@ export const PostArticle = async (req, res, next) => {
       "_id":textResponse._id 
     });
 
+    updateUserArticleList(user.id, textResponse._id) // update the user article list
     insertTags(article.tags);
 
     res
@@ -91,5 +93,15 @@ const insertTags = async (tags) => {
     else {
       await TagList.create({'title':tags[i], 'count': 1});
     }
+  }
+}
+
+const updateUserArticleList = async (id, articleId) =>{
+  try{
+    let doc = await User.findOne({ _id: id });
+    doc.articleList.push(articleId);
+    await doc.save();
+  } catch(error) {
+    return error
   }
 }

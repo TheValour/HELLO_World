@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.FLEX {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #root{
     overflow-x: hidden;
     font-family: "Comfortaa", sans-serif;
@@ -19,7 +25,7 @@
     @apply block text-sm font-medium text-gray-600
 }
 .input-class {
-    @apply mt-1 p-2 w-full border rounded-md
+    @apply mt-1 p-2 w-full border rounded-md placeholder:text-slate-300
 }
 .ql-toolbar.ql-snow {
     display: flex;

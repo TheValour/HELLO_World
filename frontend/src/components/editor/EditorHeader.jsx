@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext'
 
 export default function EditorHeader({onClickHandler, flag}) {
@@ -8,7 +9,9 @@ export default function EditorHeader({onClickHandler, flag}) {
 
   return (
     <div className='flex  justify-between items-center px-8 py-2 w-11/12'>
-        <span>MKDIR - <span className='text-blue-700 text-xs'>a blog app</span> </span>
+        <Link to='/'>
+          MKDIR - <span className='text-blue-700 text-xs'>a blog app</span> 
+        </Link>
         {warn && flag && <div className='text-xs text-red-400'>char count should be greater than 500</div>}
         <span>
             <button 

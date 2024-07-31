@@ -11,8 +11,9 @@ export const Signup = async (req, res, next) => {
         return res.json({ message: "User already exists" });
       }
       const userResponse = await User.create({ email, password, username, createdAt, title });
-      console.log(user._id)
-      const token = createSecretToken(user._id);
+      // console.log(userResponse._id)
+      
+      const token = createSecretToken(userResponse._id);
       const user = {
         "username":userResponse.username,
         "email" : userResponse.email

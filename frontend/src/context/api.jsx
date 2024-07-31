@@ -21,6 +21,7 @@ export function APIContextProvider({ children }) {
             "user": {
               "username": user.username,
               "email": user.email,
+              "id": user._id
             },
             "article": {
               ...article,

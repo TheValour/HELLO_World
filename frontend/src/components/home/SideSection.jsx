@@ -27,7 +27,7 @@ export default function SideSection() {
     async function fetchlistData(){
       // backend call
       const response = await getTagList();
-      console.log(response.data.listResponse)
+      // console.log(response.data.listResponse)
       setTags(response.data.listResponse);
     }
     fetchlistData();

@@ -73,7 +73,7 @@ const PublishForm = () => {
       handleError(error.message);
     }
   };
-  console.log(formData.title.length)
+  // console.log(formData.title.length)
   return (
     <div className='flex justify-center flex-row items-center w-full h-full' >
       <div className='flex-box bg-gray-200 w-2/5 p-5 h-4/5'>

@@ -26,7 +26,7 @@ export default function ArticleSection() {
 
             const { data } = response;
             const { success, listResponse, message } = data;
-            console.log(listResponse)
+            // console.log(listResponse)
             if (success) {
                setList(listResponse)
             } else {

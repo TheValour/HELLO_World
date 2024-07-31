@@ -36,9 +36,10 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = registerUser(inputValue);
+      const { data } = await registerUser(inputValue);
+      console.log(data)
       const { success, message } = data;
-      
+      console.log(data)
       if (success) {
         localStorage.setItem('token', data.token)
         setUser(data.user);
@@ -63,9 +64,9 @@ const Register = () => {
 
   return (
     <div className="w-full h-full flex-box items-center ">
-      <div className="p-6 bg-gray-100 shadow-md rounded-md w-1/2 h-4/5">
+      <div className="p-6 bg-gray-200 shadow-md rounded-md w-2/5 h-4/5">
         <h2 className="text-2xl font-semibold mb-4 text-center">Signup Account</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="mt-8">
           <div className="mb-4">
             <label htmlFor="email" className="label-class">
               Email
@@ -105,12 +106,14 @@ const Register = () => {
               className="input-class"
             />
           </div>
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Submit
-          </button>
-          <span className="text-gray-600 ml-5">
-            Already have an account? <Link to={"/login"} className="text-blue-500">Login</Link>
-          </span>
+          <div className="mt-12">
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+              Submit
+            </button>
+            <span className="text-gray-600 ml-5 text-sm">
+              Already have an account? <Link to={"/login"} className="text-blue-500">Login</Link>
+            </span>
+          </div>
         </form>
         <ToastContainer />
       </div>

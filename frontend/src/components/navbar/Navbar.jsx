@@ -47,16 +47,18 @@ function Navbar() {
     <> 
       <div  className="navbar-container px-16 py-4 bg-slate-200 ">
         <div className='flex flex-col text-center'>
-          <span className='font-semibold'>MKDIR </span>
+          <Link to='/'>
+            <span className='font-semibold'>MKDIR</span>
+          </Link>
           <span className='text-xs font-normal text-blue-700'>a rich text editor</span>
         </div>
         <div> 
           <span className='text-blue-700' id='its-free'>
-          <Link to='/signup'>
+          <Link to={`/${user?'profile':'login'}`}>
             {user ? user.username : ("Create account. It's free" )}
           </Link>
            {user && <button onClick={Logout}
-              className='ml-4 border border-blue-500 bg-gray-300 text-black text-xs p-2 rounded-md'>
+              className='ml-4 border border-white bg-gray-700 text-white text-xs p-2 rounded-md'>
               Logout
             </button>}
           </span>

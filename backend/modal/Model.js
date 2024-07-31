@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Your password is required"],
   },
+  articleList :{
+    type: [Object],
+    default: []
+  },
   createdAt: {
     type: Date,
     default: new Date(),
