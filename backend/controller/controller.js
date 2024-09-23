@@ -109,14 +109,12 @@ const insertTags = async (tags) => {
   }
 }
 
-const updateUserArticleList = async (id, articleId) => {
-  try {
-    // Exclude the password field when fetching the document
-    let doc = await User.findOne({ _id: id }).select('-password');    
+const updateUserArticleList = async (id, articleId) =>{
+  try{
+    let doc = await User.findOne({ _id: id });
     doc.articleList.push(articleId);
     await doc.save();
-    
-  } catch (error) {
-    return error;
+  } catch(error) {
+    return error
   }
 }
