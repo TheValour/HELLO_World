@@ -1,6 +1,6 @@
 import Text from '../modal/ArticleModal.js';
 import BoxPage from '../modal/BoxModal.js';
-import User from '../modal/Model.js';
+import User from '../modal/UserModel.js';
 import TagList from '../modal/TagsModal.js';
 
 export const PostArticle = async (req, res, next) => {
@@ -109,12 +109,14 @@ const insertTags = async (tags) => {
   }
 }
 
-const updateUserArticleList = async (id, articleId) =>{
-  try{
-    let doc = await User.findOne({ _id: id });
+const updateUserArticleList = async (id, articleId) => {
+  try {
+    // Exclude the password field when fetching the document
+    let doc = await User.findOne({ _id: id }).select('-password');    
     doc.articleList.push(articleId);
     await doc.save();
-  } catch(error) {
-    return error
+    
+  } catch (error) {
+    return error;
   }
 }

@@ -1,4 +1,4 @@
-import User from '../modal/Model.js'
+import User from '../modal/UserModel.js'
 import jwt from "jsonwebtoken";
 
 import dotenv from 'dotenv';
