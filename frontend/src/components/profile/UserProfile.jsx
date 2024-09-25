@@ -22,7 +22,7 @@ export default function UserProfile() {
         if (status && isMounted) {
           setUser(user);
         }
-        console.log(user)
+        // console.log(user)
       } catch (error) {
         console.log(error);
       }
@@ -48,7 +48,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className='w-screen h-screen flex bg-gray-50 justify-center'>
+    <div className='w-screen h-5/6 flex bg-gray-50 justify-center'>
       <HeaderProfile/>
       <div className='pt-16 bg-white p-6 min-w-96'>
         <div className='flex flex-row justify-between items-center'>

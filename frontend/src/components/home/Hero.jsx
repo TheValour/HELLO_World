@@ -2,16 +2,20 @@ import React from 'react';
 import TagsBar from '../navbar/TagsBar';
 import ArticleSection from './ArticleSection';
 import SideSection from './SideSection';
+import Footer from './Footer';
 
 const Hero = ()=> {
 
   return (
-    <div className='flex justify-center'>
-      <div className='w-3/5'>
-        <TagsBar/>
-        <ArticleSection/>
+    <div>
+      <div className='flex justify-center'>
+        <div className='w-1/2'>
+          <TagsBar/>
+          <ArticleSection/>
+        </div>
+        <SideSection/>
       </div>
-      <SideSection/>
+      <Footer/>
     </div>
   )
 }

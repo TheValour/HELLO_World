@@ -66,23 +66,24 @@ export default function Read() {
   }
 
   const tags = detail.tags.map((ele, index) =>
-    <span key={index} className='bg-gray-300 ml-4 p-2 rounded-md'>{ele}</span>
+    <span key={index} className='bg-gray-300 ml-7 p-2 rounded-md'>{ele}</span>
   );
 
   return (
-    <div className='py-4 pb-10'>
+    <div className='py-4 pb-10 FLEX flex-col border-x-violet-300 border-dashed border-x-8 border-b-8 border-b-gray-200'>
       <div className=' flex items-center flex-col text-2xl py-5 font-semibold'>
         <h2 className='py-4'>{detail.title}</h2>
-        <img src={detail.image} alt={detail.title} className='w-96'/>
+        <img src={detail.image} alt={detail.title} className='w-80'/>
       </div>
       
-      <div className="ql-snow">
+      <div className="ql-snow FLEX">
         <div id="editor-container" ref={showRef}></div>
       </div>
-      {tags}
-
-      <div className='mt-20 ml-4'>
-        author <span className='text-blue-600'>{detail.username}</span>
+      <div className='w-10/12 mt-10'>
+        {tags}
+        <div className='mt-5 ml-7'>
+          author <span className='text-blue-600'>{detail.username}</span>
+        </div>
       </div>
     </div>
   );

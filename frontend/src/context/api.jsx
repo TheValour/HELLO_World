@@ -31,6 +31,17 @@ export function APIContextProvider({ children }) {
 
         return response;
     };
+    const UpdateArticleAPI = async (id, article) => {
+        const response =  await axios.post(`${API}/update`, {
+            "_id" : id,
+            "article": {
+              "quill" : article,
+              "createdAt": new Date()
+            },
+        });
+
+        return response;
+    };
 
     const readArticle = async (id) => {
         const response = await axios.get(`${API}/read/${id}`);
@@ -59,7 +70,7 @@ export function APIContextProvider({ children }) {
     }
 
     return (
-        <APIContext.Provider value={{ loginUser, registerUser, publishArticle, getArticleById, readArticle, getArticleList, getTagList, verifyUser}}>
+        <APIContext.Provider value={{ loginUser, registerUser, publishArticle, UpdateArticleAPI, getArticleById, readArticle, getArticleList, getTagList, verifyUser}}>
             {children}
         </APIContext.Provider>
     );

@@ -1,6 +1,6 @@
 import { Login, Signup } from "../controller/authController.js";
 import { userVerification } from "../controller/AuthMiddleware.js";
-import {FindArticle, PostArticle, FindList, FindTag, TagListControl, getArticleById } from "../controller/controller.js";
+import {FindArticle, PostArticle, FindList, FindTag, TagListControl, getArticleById, UpdateArticle } from "../controller/controller.js";
 import { Router } from 'express';
 const router = Router();
 
@@ -13,6 +13,7 @@ router.get("/list", FindList);
 router.get("/list/:tag", FindTag);
 router.get("/article/:id", getArticleById);
 router.get("/read/:id", FindArticle);
+router.post("/update", UpdateArticle);
 router.post("/write", PostArticle);
 
 export { router as authRoute };

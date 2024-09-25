@@ -41,15 +41,15 @@ export default function Element({list}) {
     )
   }
 
-  data.forEach(ele => console.log(ele))
-  let article = data.map((ele) => <Atom data={ele}/>)
+  // data.forEach(ele => console.log(ele))
+  let article = data.map((ele) => <Atom data={ele} key={ele._id}/>)
   if(article.length === 0) {
     article = <div className='text-gray-500 text-sm mt-3'>No article Present...</div>
   }
 
   return (
     <div>
-      <h2 className='underline text-green-600'>Article List</h2>
+      <h2 className='underline text-green-600 mb-4'>Article List</h2>
       {article}
     </div>
   )

@@ -12,7 +12,7 @@ const Article = ({ data }) => {
         <div className='bg-gray-100 my-2 p-2'>
             <div className='flex justify-between pr-16'>
                 <div>
-                    <Link to={`/read/${data._id}`} >
+                    <Link to={`read/${data._id}`} >
                         <h2 className="font-semibold">{data.title}</h2>
                         <h2 className=" text-sm mb-8 text-gray-800">{data.description}</h2>
                     </Link>

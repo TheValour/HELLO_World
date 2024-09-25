@@ -11,21 +11,23 @@ import Read from './components/feature/Read'
 import PublishForm from './components/feature/Publish'
 import PageNotFound from './components/util/PageNotFound'
 import UserProfile from './components/profile/UserProfile'
+import Edit from './components/feature/Edit'
 
 function App() {
   return (
     <Routes>
       <Route path='/signup' element={<Register/>} />
       <Route path='/login' element={<Login/>} />
-      <Route path='/profile' element={<UserProfile/>}/>
       <Route path='/publish' element={<PublishForm/>}/>
       <Route path='/write' element={<Write/>}/>
 
       <Route path='/' element={<Navbar/>} >
+        <Route path='/profile' element={<UserProfile/>}/>
         <Route  path='/' element={<Hero/>} >
           <Route path='/article' element={<ArticleSection/>}/>
         </Route>
-
+        
+        <Route path='/edit/:id' element={<Edit/>}/>
         <Route path='/read/:id' element={<Read/>}/>
       </Route>
         

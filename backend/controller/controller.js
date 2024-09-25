@@ -50,6 +50,19 @@ export const FindArticle = async (req, res) => {
   }
 };
 
+export const UpdateArticle = async (req, res) => {
+  try {
+    const {_id, article } = req.body;
+    const updateDetail = await Text.findByIdAndUpdate(_id, { article  });    
+
+    res.status(200).json({ message: "Updated article", success: true });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", success: false });
+  }
+};
+
 export const getArticleById = async (req, res) => {
   try {
     const id = req.params.id;

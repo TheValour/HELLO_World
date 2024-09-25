@@ -29,7 +29,7 @@ export default function TextEditor() {
     q.on("text-change", () => {
       const saveQuill = q.getContents();
       setQuill(saveQuill);
-      setFlag(q.getLength() < 500);
+      setFlag(q.getLength() < 50);
       setCount(q.getLength());
     });
   }, [setQuill]);

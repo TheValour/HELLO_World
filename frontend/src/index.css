@@ -10,7 +10,8 @@
 
 #root{
     overflow-x: hidden;
-    font-family: "Comfortaa", sans-serif;
+    /* font-family: "Comfortaa", sans-serif; */
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100vh;
     width: 100vw;
 }
@@ -26,6 +27,13 @@
 }
 .input-class {
     @apply mt-1 p-2 w-full border rounded-md placeholder:text-slate-300
+}
+
+#editor-container {
+    width: 90%;
+}
+.ql-snow {
+    width: 90%;
 }
 .ql-toolbar.ql-snow {
     display: flex;

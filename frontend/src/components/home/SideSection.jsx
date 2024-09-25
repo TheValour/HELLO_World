@@ -44,14 +44,14 @@ export default function SideSection() {
   ));
 
   return (
-    <div className='w-1/3 mt-3'>
-      <div className='bg-blue-100 p-4 h-screen w-full sticky top-0'>
+    <div className='w-1/5 mt-3'>
+      <div className='bg-blue-100 p-4 h-full w-full sticky top-0'>
         <div className='mb-5'>
-          <input type="text" name="" id="" className='pl-2 h-8' value={searchTag} 
+          <input type="text" name="" id="" className='h-7' value={searchTag} 
             onChange={(e) => setSearchTag(e.target.value)} onKeyDown={onKeyPress} 
             />
-          <span className=' text-white p-2 bg-gray-400  cursor-pointer' onClick={onClickHandler}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />  
+          <span className=' text-white p-1 bg-gray-400  cursor-pointer' onClick={onClickHandler}>
+            <FontAwesomeIcon icon={faMagnifyingGlass}/>  
           </span>       
         </div>
         <div id='tagList' className='overflow-hidden h-auto w-full'>
