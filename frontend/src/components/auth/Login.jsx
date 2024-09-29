@@ -60,8 +60,8 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-full flex-box items-center">
-      <div className="bg-gray-200 p-6 rounded-md shadow-md w-2/5 h-3/4">
+    <div className="w-full h-full flex-box items-center bg-green-100">
+      <div className="bg-gray-200 p-6 rounded-md shadow-md w-2/6 h-4/6">
         <h2 className="text-2xl font-semibold mb-4 text-center">Login Account</h2>
         <form onSubmit={handleSubmit} className="mt-8">
           <div className="mb-4">

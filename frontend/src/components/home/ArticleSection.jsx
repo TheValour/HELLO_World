@@ -51,7 +51,7 @@ export default function ArticleSection() {
     ));
 
     return (
-        <div >
+        <div className='min-h-80'>
             {articles}
         </div>
     );

@@ -2,6 +2,9 @@ import React, { useCallback, useContext, useState} from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
+import ImageResize from 'quill-image-resize-module-react';
+Quill.register('modules/imageResize', ImageResize);
+
 import { toolbarOptions } from "./setting";
 import { QuillContext } from "../../context/QuillContext";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +25,11 @@ export default function TextEditor() {
     const q = new Quill(editor, {
       modules: {
         toolbar: toolbarOptions,
+        
+        imageResize: {
+          parchment: Quill.import('parchment'),
+          modules: ['Resize', 'DisplaySize', 'Toolbar']
+        },
       },
       theme: "snow",
     });
@@ -42,7 +50,7 @@ export default function TextEditor() {
     <>
       <span className="flex flex-col items-center justify-center ">
         <EditorHeader onClickHandler={onClickHandler} flag={flag}/>
-        <div id="editor-container" className="w-11/12" ref={wrapperRef}></div>
+        <div id="editor-container" className="w-11/12 FLEX flex-col mt-2" ref={wrapperRef}></div>
       </span>
     </>
   );

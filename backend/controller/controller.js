@@ -2,6 +2,7 @@ import Text from '../modal/ArticleModal.js';
 import BoxPage from '../modal/BoxModal.js';
 import User from '../modal/UserModel.js';
 import TagList from '../modal/TagsModal.js';
+import AdminTagList from '../modal/AdminTags.js';
 
 export const PostArticle = async (req, res, next) => {
   try {
@@ -22,7 +23,13 @@ export const PostArticle = async (req, res, next) => {
     });
 
     updateUserArticleList(user.id, textResponse._id) // update the user article list
-    insertTags(article.tags);
+    
+    if(user.isAdmin) {
+      insertAdminTags(article.tags);
+    }
+    else {
+      insertTags(article.tags);
+    }
 
     res
     .status(201)
@@ -108,6 +115,24 @@ export const TagListControl = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", success: false });
   }
 };
+export const getAdminTagList = async (req, res) => {
+  try {
+    const listResponse = await AdminTagList.find();
+    res.status(200).json({ message: "User article Find", success: true, listResponse });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", success: false });
+  }
+};
+
+const insertAdminTags = async (tag) => {
+  const searchResponse = await AdminTagList.find({'title':tag[0]})
+
+  if(!searchResponse.length) {
+    await AdminTagList.create({'title':tag[0]});
+  }
+}
 
 const insertTags = async (tags) => {
   for(let  i=0; i<tags.length; i++) {

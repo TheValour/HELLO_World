@@ -8,7 +8,7 @@ export default function EditorHeader({onClickHandler, flag}) {
 
 
   return (
-    <div className='flex  justify-between items-center px-8 py-2 w-11/12'>
+    <div className='flex justify-between items-center px-8 py-2 w-11/12'>
         <Link to='/'>
           MKDIR - <span className='text-blue-700 text-xs'>a blog app</span> 
         </Link>

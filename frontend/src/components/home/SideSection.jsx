@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { APIContext } from '../../context/api';
 
 export default function SideSection() {
-  const {getTagList} = useContext(APIContext);
+  const {getAdminTagList} = useContext(APIContext);
   const navigate = useNavigate();
   const [tags, setTags] = useState([]);
   const [searchTag, setSearchTag] = useState("");
@@ -26,7 +26,7 @@ export default function SideSection() {
   useEffect(() => {
     async function fetchlistData(){
       // backend call
-      const response = await getTagList();
+      const response = await getAdminTagList();
       // console.log(response.data.listResponse)
       setTags(response.data.listResponse);
     }
@@ -36,7 +36,7 @@ export default function SideSection() {
   const tagList = tags.map((ele) => (
     <span key={ele._id}>
       <Link  to={`/article?cat=${ele.title}`} 
-        className='bg-gray-100 mx-2 p-2'
+        className='bg-yellow-200 mx-2 p-2 rounded-lg'
         >
         {ele.title}
       </Link>

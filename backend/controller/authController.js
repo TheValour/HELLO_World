@@ -4,14 +4,14 @@ import User from '../modal/UserModel.js'
 
 export const Signup = async (req, res, next) => {
     try {
-      const { email, password, username, createdAt, title } = req.body;
+      const { email, password, username } = req.body;
       const existingUser = await User.findOne({ email });
       
       if (existingUser) {
         return res.json({ message: "User already exists" });
       }
-      password = await bcrypt.hash(password, 12);
-      const userResponse = await User.create({ email, password, username, createdAt, title });
+      const newPassword = await bcrypt.hash(password, 12);
+      const userResponse = await User.create({ email, "password": newPassword, username });
       // console.log(userResponse._id)
       
       const token = createSecretToken(userResponse._id);

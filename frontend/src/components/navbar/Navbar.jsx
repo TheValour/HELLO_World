@@ -54,8 +54,8 @@ function Navbar() {
         </div>
         <div> 
           <span className='text-blue-700' id='its-free'>
-          <Link to={`/${user?'profile':'login'}`}>
-            {user ? user.username : ("Sing In" )}
+          <Link to={`/${user?'profile':'login'}`} className='bg-slate-100 p-2 rounded-md'>
+            {user ? user.username : ("Sign In" )}
           </Link>
            {user && <button onClick={Logout}
               className='ml-4 border border-white bg-gray-700 text-white text-xs p-2 rounded-md'>

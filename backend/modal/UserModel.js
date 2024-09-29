@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
+  isAdmin : {
+    type : Boolean,
+    default : false
+  },
   email: {
     type: String,
     required: [true, "Your email address is required"],

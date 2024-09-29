@@ -21,7 +21,8 @@ export function APIContextProvider({ children }) {
             "user": {
               "username": user.username,
               "email": user.email,
-              "id": user._id
+              "id": user._id,
+              "isAdmin" : user.isAdmin
             },
             "article": {
               ...article,
@@ -62,6 +63,10 @@ export function APIContextProvider({ children }) {
         const response = await axios.get(`${API}/taglist`);
         return response;
     };
+    const getAdminTagList = async () => {
+        const response = await axios.get(`${API}/admintaglist`);
+        return response;
+    };
 
     const verifyUser= async () => {
         const token = localStorage.getItem('token');
@@ -70,7 +75,11 @@ export function APIContextProvider({ children }) {
     }
 
     return (
-        <APIContext.Provider value={{ loginUser, registerUser, publishArticle, UpdateArticleAPI, getArticleById, readArticle, getArticleList, getTagList, verifyUser}}>
+        <APIContext.Provider 
+            value={{ loginUser, registerUser, 
+                publishArticle, UpdateArticleAPI, getArticleById, readArticle, getArticleList, 
+                getTagList, getAdminTagList, verifyUser}}
+        >
             {children}
         </APIContext.Provider>
     );
