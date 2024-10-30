@@ -8,7 +8,7 @@ const Hero = ()=> {
 
   return (
     <div>
-      <div className='flex justify-center'>
+      <div id="HERO" className='flex justify-center'>
         <div className='w-1/2'>
           <TagsBar/>
           <ArticleSection/>
