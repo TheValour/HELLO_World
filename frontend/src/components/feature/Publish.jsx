@@ -78,14 +78,14 @@ const PublishForm = () => {
     <div className='flex justify-center flex-row items-center w-full h-full' >
       <div className='flex-box bg-gray-200 w-2/5 p-5 h-4/5'>
         <label className='text-xl'>Title:</label><br/>
-        {formData.title.length <= 5 && <span className='text-xs text-red-400'> have more than 30 char</span>}
+        {formData.title.length <= 10 && <span className='text-xs text-red-400'> have more than 10 char</span>}
         <input type="text" value={formData.title} 
           onChange={handleChange} name="title" 
           className={`w-4/5 border-none p-2 outline-${formData.title.length>30?'green':'red'}-500`} required
           /><br/>
 
         <label>Write a short Description:</label><br/>
-        {formData.description.length <= 5 && <span className='text-xs text-red-400'> have more than 50 char</span>}
+        {formData.description.length <= 30 && <span className='text-xs text-red-400'> have more than 30 char</span>}
         <textarea value={formData.description} onChange={handleChange} 
           name="description" className="w-4/5 h-1/6 p-2" required/>
       </div>
@@ -102,7 +102,7 @@ const PublishForm = () => {
         <button
           onClick={uploadFile}
           className='bg-green-300 w-1/5 p-1 rounded-sm'
-          disabled={formData.description.length < 5 || formData.title.length <= 5}
+          disabled={formData.description.length < 10 || formData.title.length <= 30}
         >
           Publish
         </button>
