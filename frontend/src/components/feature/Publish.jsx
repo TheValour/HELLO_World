@@ -102,7 +102,7 @@ const PublishForm = () => {
         <button
           onClick={uploadFile}
           className='bg-green-300 w-1/5 p-1 rounded-sm'
-          disabled={formData.description.length < 10 || formData.title.length <= 30}
+          disabled={formData.description.length < 30 || formData.title.length <= 10}
         >
           Publish
         </button>
